@@ -1,0 +1,353 @@
+---
+title: "Data Wrangling with R (CSP1004)"
+subtitle: "Pre-course Assignment"
+author: 
+- "Shannon Albeke - Course Leader"
+- "University of Wyoming, WYGISC"
+- "salbeke@uwyo.edu"
+- "(307) 760-9993"
+date: "Updated on `r Sys.Date()`"
+output:
+  html_document:
+    theme: spacelab
+  
+---
+
+<style type="text/css">
+
+body, td {
+   font-size: 14pt;
+}
+code.r{
+  font-size: 14pt;
+}
+pre {
+  font-size: 14pt
+}
+</style>
+
+```{r setup, message=FALSE, echo=FALSE}
+library(knitr)
+library(leaflet)
+library(tidyverse)
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+<br>
+
+# Class Logistics
+
+- **When:** January 13-17, 2020
+- **First Day Start Time:** 8:30 am
+- **Last Day End Time:** 11:30 am
+- **Rough Agenda:**
+<br>
+
+```{r agenda, echo = FALSE, out.height= "70%", out.width= "70%", fig.align='left'}
+
+include_graphics(c("E:/Dropbox/shannon/Work_Temp/NCTC_DataWrangling/DataWrangling/CSP1004_Albeke/Lab_Setup/Agenda.jpg"))
+```
+<br>
+
+- **Class location:** NCTC, Shepherdstown, WV 25443
+- **Room:** Instructional East, Basement GIS Computer Lab (G30)
+
+<br>
+
+```{r, class location, echo = FALSE}
+library(leaflet)
+m <- leaflet() %>% 
+  addTiles() %>% 
+  addMarkers(lng = -77.80365, lat = 39.48787, popup = "Insturctional East Building")
+
+m
+```
+
+
+# Frequently Asked Questions
+
+### Do I need to bring my laptop to class? 
+
+*Answer:* It depends.  If your class is at the National Conservation Training Center (NCTC), then bringing your laptop to class is optional. We'll provide you with a computer during class, but you may want to work after hours with your own laptop. If your class is not at NCTC, then it is required that you bring your laptop with the software installed and configured according to the steps listed in the **Software Installation** section.
+
+### Do I need to install the class software on my work computer?
+
+*Answer:*  Yes. You'll need to have **R** and the **R Studio** IDE installed to complete the online training.  Also, we want you to hit the ground running when you come back from class.
+
+### My IT staff will not install the software on my work computer, what do I do?
+
+*Answer:* Perform acts of kindness and provide gifts that are < $20. Open source software are preferred over commercial software in the Federal Government. 
+
+<br>
+
+# Mandatory Precourse Homework
+
+Install **R** and **R Studio** (see Step 1 below) and complete the two online classes from Data Camp. This should take you about 3 hours each.  The second online class is more challeging, but it's even more applicable to what we teach in class, so give it your best shot.
+
+- [R for the Intimidated](https://www.datacamp.com/community/open-courses/r-for-the-intimidated )
+
+
+- [Getting and Cleaning Data](https://www.datacamp.com/community/open-courses/getting-and-cleaning-data-with-swirl)
+
+<br>
+
+# Software Installation {.tabset .tabset-fade .tabset-pills}
+
+Steps 1-3 will guide you through the installation of **R**, **R Studio** and packages used in class. Step 4 shows you how to configure **R Studio**. Step 5 has brief instructions on how to install the class materials.   
+
+## Step 1 
+
+Download and install the most current versions of **R** and **RStudio** for your operating system.  Install R in your User folder (i.e., `C:\Users\ekelchlin\Documents\R`), so you won't need administrative rights. However, you'll need administrative rights for R Studio. For this class, we will be using **R 3.6.2**.  
+
+-  [R - Windows](https://cran.r-project.org/bin/windows/base/)
+-  [R - Mac](https://cran.r-project.org/bin/macosx/)
+-  [RStudio](https://www.rstudio.com/products/rstudio/download/)
+
+<br>
+*Note: To open the link in a new browser tab, right-mouse click on the link and select Open link in new tab.*
+
+## Step 2  
+
+The instructions below will guide through a process on how to install R packages used in class.  You can think of packages as "little add-ons" that expand what you can do in R. [Tidyverse](https://www.tidyverse.org/), for example, is one of my favorite packages for data science.
+
+-  Open R Studio, select **File > New File > R Script**.  This creates a new R script file and opens a new tab called `Untitled1` in the Source window pane.  
+
+<br>
+![](C:/RMarkdown_Projects/Setup/step1.jpg)
+
+
+
+-  Highlight and copy the code below. Paste the code in the new R script file. *This is a custom function (geesh! so fancy already) that looks to see if you already have the package installed and if not, it will install the package for you. More on packages later in the class.* 
+
+<br>
+```{r install and load required packages, eval=FALSE}
+
+packages <- function(x){
+  x <- as.character(match.call()[[2]])
+  if (!require(x,character.only = TRUE)) {
+    install.packages(pkgs = x,repos = "http://cran.r-project.org")
+    require(x,character.only = TRUE)
+  }
+}
+```
+
+-  Highlight the entire code block and click the **run** button.  This will add a new function called `packages` in the Environment pane.
+
+<br>
+![](C:/RMarkdown_Projects/Setup/step2.jpg)
+
+
+-  Next, highlight and copy the code below and paste in the R script file below the packages function section (i.e., line 9).
+
+<br>
+```{r packages to install, eval=FALSE}
+packages(knitr)
+packages(rmarkdown)
+packages(tidyverse)
+packages(tinytex)
+packages(yaml)
+packages(installr)
+packages(kableExtra)
+packages(devtools)
+packages(lattice)
+packages(boot)
+packages(AICcmodavg)
+packages(car)
+packages(epitools)
+packages(gmodels)
+packages(gplots)
+packages(leaps)
+packages(leaflet)
+packages(lme4)
+packages(maps)
+packages(mapview)
+packages(maptools)
+packages(MASS)
+packages(multcomp)
+packages(nlme)
+packages(odbc)
+packages(plotly)
+packages(pom)
+packages(pwr)
+packages(raster)
+packages(rgbif)
+packages(rgdal)
+packages(rms)
+packages(ROCR)
+packages(sf)
+packages(data.table)
+packages(spocc)
+packages(sp)
+packages(survey)
+packages(spsurvey)
+packages(tigris)
+
+```
+
+-  Highlight this new block of code and click the **run** button again.  This will download packages and add them to your R library. You should see a lot of red, blue and black text scrolling up in the Console pane.  The installation process will take about 30 seconds.  
+
+<br>
+![](C:/RMarkdown_Projects/Setup/step3.jpg)
+
+
+<br>
+
+Your packages will be saved in the library folder. To find out where all the packages live, simply copy the code below, paste in the Source pane and run the code.
+
+<br>
+```{r}
+.libPaths()
+```
+
+
+## Step 3
+
+Install **pandoc** and **MiKTeX** applications for use with [R Markdown](https://rmarkdown.rstudio.com/).  This will allow you to publish PDF documents and provide some cool syntax to further customize your documents. They will run in the background and can be ignored from this point forward.
+
+### How to Install pandoc
+
+-  Select and copy the code below and paste in the R script file. 
+
+```{r install pandoc for use with R Markdown, eval=FALSE}
+
+require(installr)
+install.pandoc()
+
+```
+
+<br>
+
+-  Highlight this new block of code and click the **run** button.
+
+-  A setup dialog will appear.  Check the `I accept...` box and click Install.
+
+<br>
+![](C:/RMarkdown_Projects/Setup/step4.jpg)
+
+<br>
+
+-  In your Console, type 1.  Close all your applications and and hit **ENTER** to restart your computer.
+
+<br>
+![](C:/RMarkdown_Projects/Setup/step5.jpg)
+
+
+
+### How to Install MiKTeX (Full Version)
+
+-  Click this link [MiKTeX](https://miktex.org/2.9/setup)
+
+-  Download the Net Installer
+
+<br>
+![](C:/RMarkdown_Projects/Setup/step6.jpg)
+
+<br>
+
+-  Click the downloaded file to start the installation.  Click the *I accept...* box and the **Next** button.
+
+<br>
+![](C:/RMarkdown_Projects/Setup/step7.jpg)
+
+<br>
+
+-  Download the MiKTeX program.  It's a 2GB file, so it's best to go plunder the fridge for some food.  Take stock of your life and come back to finish the installation process.
+
+<br>
+![](C:/RMarkdown_Projects/Setup/step8.jpg)
+
+<br>
+
+-  Once the file is downloaded, click the next radio button to install the program. Install the program only for you and place in your **Documents** folder.
+
+<br>
+![](C:/RMarkdown_Projects/Setup/step9.jpg)
+
+<br>
+
+-  MiKTeX should be in your program list when done.
+
+<br>
+![](C:/RMarkdown_Projects/Setup/step12.jpg)
+
+
+## Step 4 
+
+Let's walk through some R Studio settings to standardize the look and feel of the Integrated Development Environment (IDE).  This will allow the instructor(s) to respond quicker when you run into a glitch or an error.  These settings will also speed-up your learning process.
+
+Open R Studio and select **Tools > Global Options...** from the top menu bar.
+
+<br>
+
+### General R Options
+
+-  Change the default working directory to the class folder.  
+-  Also, check the boxes as shown below.
+
+<br>
+![](C:/RMarkdown_Projects/Setup/step13.jpg)
+
+### Source Code: Editing
+<br>
+![](C:/RMarkdown_Projects/Setup/Code_Editing.png)
+
+### Source Code: Display
+<br>
+![](C:/RMarkdown_Projects/Setup/Code_Display.png)
+
+### Source Code: Saving
+<br>
+![](C:/RMarkdown_Projects/Setup/Code_Saving.png)
+
+### Source Code: Completion
+<br>
+![](C:/RMarkdown_Projects/Setup/Code_Completion.png)
+
+### Source Code: Diognostics
+<br>
+![](C:/RMarkdown_Projects/Setup/Code_Diognostics.png)
+
+
+### Appearance and Themes
+-  I use the **TexeMate(default)** theme or my new favorite the **Dracula** theme for those who like it dark and bloody.
+-  I keep the font large, because lets face it, we are not getting any younger.
+
+<br>
+![](C:/RMarkdown_Projects/Setup/Appearance.png)
+
+### Pane Layout
+
+<br>
+![](C:/RMarkdown_Projects/Setup/PaneLayout.png)
+
+### Packages
+
+<br>
+![](C:/RMarkdown_Projects/Setup/Packages.png)
+
+### RMarkdown
+
+<br>
+![](C:/RMarkdown_Projects/Setup/Rmarkdown.png)
+
+### Sweave on Down
+
+<br>
+![](C:/RMarkdown_Projects/Setup/SweaveDown.png)
+
+## Step 5  
+
+I'll share the course materials from my Google Drive or as a compressed zip file. Everything will be in one folder, named as **CSP1004_date**. Take this folder, extract if necessary, and save it on the root of your `C:\` Drive. Rename the folder **CSP1004**.
+
+# 
+<br>
+
+```{r logo, echo = FALSE, out.height= "20%", out.width= "20%", fig.align='center'}
+
+include_graphics("C:/RMarkdown_Projects/Setup/NCTC.jpg")
+```
+
+
+
+
+
