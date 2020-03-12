@@ -1,0 +1,194 @@
+---
+title: "RMarkdown_Exercise2"
+author: "Eric Kelchlin"
+date: "May 2018"
+output: html_document
+---
+
+# What is R Markdown?
+
+**It's a platform for conducting data science!**  You combine your thoughts, your code and your results all in one location.  And best of all, you click `Knit` and transform your document into a professional report, presentation or interactive document. 
+
+Common outputs formats include `HTML`, `PDF` and `Word`. This class will focus on `HTML` and interactive `shiny` documents. 
+
+## Task 1 
+
+`knit` the `html_document` and view the results. Also, view your working folder. You should now see two documents of the same name, except one end with a `.rmd` extension, and the other with an `.html` extension.  The `.rmd` file is this R Markdown document, the other is the rendered output. 
+
+To change the format type from HTML to Word, simply change the `output:` above to *word_document* and click the `knit` button again. Go ahead and make the change and see view the document.
+
+Another popular output is an *R Notebook*. Change the output to `html_notebook` and view the document.  How does an `html_notebook` differ from an `html_document`?
+
+# Typesetting  
+R Markdown allows you to embed formatting instructions into your text to enhance the look and feel of your knitted document. These include:
+
+*italics* **bold** `monocode`, or _italics_ and __bold__ for people who are afraid of the * symbol.
+
+## Block Formating
+Add some block formatting to your text by adding an `>` before each line or sentence.
+
+>
+> This formating option adds emphasis to your paragraph or code with a gray bar and larger font.
+>
+
+## Titles & Headers
+Use leading hashtags. The number of hashtags determines the header's level.  The hash tag will also create an outline that will help with real-time navigation.  See the small outline button to the top right of this Source Pane.  Also, see the bottom left of this Source Pane with the double arrows.
+
+# First level header
+## Second level header
+### Third level header
+###### All the way down to a 6th level.  This is just silly.
+
+## Lists
+To make a bulleted list, place each item on a new line after an asterisk and a space, like this:
+
+* item 1
+* item 2
+* item 3
+
+To make an ordered list, place each item on a new line after a number followed by a period followed by a space, like this:   
+1. item 1
+2. item 2
+3. item 3
+
+**Space does matter**. You need to place a blank line between the list and any paragraphs that come before it. 
+
+## Tab Sets
+
+Use `{.tabset}` (a CSS class argument) to place lower level headers into tabs.  This will improve navigation among sections and better yet, it just looks cool.  
+
+## My Main Section 
+### Tab 1
+A whole latta love
+
+### Tab 2
+The "h" is silent
+
+### Tab 3
+Keep on Truckin'
+
+### Tab 4
+How do you spell check?  **Hit F7**, or click **Edit> Check Spelling**
+
+## Task 2 
+
+1.  Add {.tabset} at the end of **## My Main Section header** and `knit` the document.
+
+2.  Add `.tabset-fade` and `.tabset-pills` to the CSS code one at a time and `knit` the document in between to see what changes happen to the Tabs.  Include a space between each argument and don't include the back-ticks. 
+
+## Links
+You can turn a word into a link by surrounding it in hard brackets and then placing the link behind it in parentheses, like this:
+
+[RStudio](www.rstudio.com)
+
+## Images
+It's like a web link, but add a "bang" in front of the brackets.
+
+![](C:/CSP1004/Exercise2/Yes.jpg) 
+
+[Working with Images in RMarkdown](http://blog.revolutionanalytics.com/2017/06/rmarkdown-tricks.html)
+
+
+# YAML Options 
+YAML stands for Yet Another Markup Language. You can add knitr, Pandoc, CSS (Cascading Style Sheets) and HTML code to modify your document. And again, **Space does matter**.
+
+## Task 3 
+
+1.  Let's modify the author section to include your name, title and email. Each on seperate lines under the title section.  
+
+2.  Let's Replace the written date with this code, include the parentheses "`r format(Sys.time(), '%Y %B %d')`"
+
+3.  Visit [this link](https://rmarkdown.rstudio.com/html_document_format.html#figure_options) to figure out how to:
+
+* Add a floating table of contents.
+* Add a theme that will change the appearance of your document (i.e., cosmo).
+
+# R code chunks
+
+You can embed R code into your R Markdown document with the knitr syntax. To do this, surround your code with two lines: one that contains ```{r} and one that contains ```. The result is a code chunk that looks like this:
+
+```{r}
+# some code
+```
+
+**Another way to easily create a code chunk is.....**
+
+Here's an example of two code chunks that you will commonly use right after the YAML in the R Markdown document.  The first establishes global settings for all your code chunks, the second "activates" your libraries that will be used throughout the project. Notice how you add a title after `r` to indicate the purpose of the code chunk. This will be used as a standard throughout the class.  Please note however, that you should avoid using the same title for more than one code chunk in the same document.  The code will not knit and you will go insane trying to figure out why.
+
+```{r setup, include= FALSE}
+options(knitr.table.format = "html")
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r required libraries, message = FALSE}
+require(kableExtra)
+require(knitr)
+require(tidyverse)
+require(readxl)
+```
+
+Each R Markdown document is given a fresh, empty R session to run its code chunks in. This means that you will need to define any R objects that this document uses - and load any packages that it uses - inside the same R Markdown document.
+
+**Necessary Packages:** you will need `pandoc` and `knitr` to produce HTML and Word documents and `MiKTeX` to produce pdf documents. You will also need the `kableExtra` package to produce nice looking tables. Note: the `pandoc` package will run in the background, so you don't need to add it to your library chunk.
+
+## Customize R code chunks
+You can customize each R code chunk in your report by providing optional arguments after the r in ```{r}, which appears at the start of the code chunk. 
+
+
+1. `echo = FALSE` - Use if you only want to see the results in the output document, not the code. Great for sharing to managers who could care less about the code.
+
+2. `eval = FALSE` - R Markdown will not run the code or include its results, but it will display the code in the output document.
+
+3. `results = 'hide'` - R Markdown will run the code, but not display the results or the code in the output document.
+
+
+## Task 4  
+
+View the [kniter options document](https://yihui.name/knitr/options/) or test in a new code chunk to answer the following questions:
+
+1. How does `include = FALSE` and `message = FALSE` code chunk options compare to `echo = FALSE`?  Test this in a code chunk or visit the link above for answers.
+
+2. What options would you use to change the height and width of a this image to 50% and only see the results in the output? 
+
+```{r}
+include_graphics("C:/CSP1004/Exercise2/Yes.jpg") 
+```
+
+# Tables
+
+[Create Awsome Tables](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html#overview) 
+
+The tables can be boring in R Markdown unless you use functions from the `kable` and `kableExtra packages`. 
+
+## Task 6
+
+1. Remove the eval and echo chode chunk options and knit the document.  Take a look at the table, nice for class but not publication worthy.
+
+```{r tables, eval = FALSE, echo = FALSE}
+mydata <- read_xlsx(path = "C:/CSP1004/Exercise2/USReligionCensus.xlsx",
+                              sheet = "2010", range = "A5:D241")
+
+presbyterian <- mydata %>% 
+  filter(grepl("Presbyterian", `Religious Group`, ignore.case = TRUE)) %>% 
+  arrange(desc(Congregations,`Religious Group`))
+
+presbyterian
+
+```
+
+2.  Add the following code the the code chunk `kable(presbyterian) %>% kable_styling(bootstrap_options = "striped", full_width = F)` and knit the document.
+
+>TIP: Since I have `options(knitr.table.format = "html")` in the setup code chunk, I don't need to state my table format. Otherwise I would need to add `kable(dataname, "html")` to each kable function. 
+
+3.  Visit the link above and see how you can add **"hover"** to the bootstrap_options to modify the table even more.
+
+4.  Add the following `df_print: paged` to your YAML header and `knit` the document.  How does the raw table look now?  
+
+# More R Markdown Help
+
+- [Introduction to R Markdown](https://rmarkdown.rstudio.com/lesson-1.html)
+- [RStudio](https://rmarkdown.rstudio.com/html_document_format.html)
+- [Daringfireball](https://daringfireball.net/projects/markdown/)
+- [Reference Guide](https://www.rstudio.com/wp-content/.../rmarkdown-reference.pdf)
+- [Cheat Sheet](https://www.rstudio.com/wp.../03/rmarkdown-cheatsheet-2.0.pdf)
+

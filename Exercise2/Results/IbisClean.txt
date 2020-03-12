@@ -1,0 +1,25 @@
+Site Lat Long Habitat MyYear MyCount
+"Carson Lake" -118.7313205 39.31216183 "Hardstem Bullrush" 1972 0
+"Stillwater Res" -118.6387205 39.46690273 "Hardstem Bullrush" 1972 1000
+"Tule Lake" -118.7261867 39.48407498 "Alkali Bullrush" 1972 1300
+"Mallard Lake" -118.5092326 39.58643327 "Hardstem Bullrush" 1972 500
+"Big Pool" -118.5364232 39.5900966 "Alkali Bullrush" 1972 20
+"Little Pool" -118.5172186 39.61177954 "Alkali Bullrush" 1972 200
+"Carson Lake" -118.7313205 39.31216183 "Hardstem Bullrush" 1973 500
+"Stillwater Res" -118.6387205 39.46690273 "Hardstem Bullrush" 1973 400
+"Tule Lake" -118.7261867 39.48407498 "Alkali Bullrush" 1973 800
+"Mallard Lake" -118.5092326 39.58643327 "Hardstem Bullrush" 1973 900
+"Big Pool" -118.5364232 39.5900966 "Alkali Bullrush" 1973 200
+"Little Pool" -118.5172186 39.61177954 "Alkali Bullrush" 1973 0
+"Carson Lake" -118.7313205 39.31216183 "Hardstem Bullrush" 1974 0
+"Stillwater Res" -118.6387205 39.46690273 "Hardstem Bullrush" 1974 800
+"Tule Lake" -118.7261867 39.48407498 "Alkali Bullrush" 1974 1400
+"Mallard Lake" -118.5092326 39.58643327 "Hardstem Bullrush" 1974 2000
+"Big Pool" -118.5364232 39.5900966 "Alkali Bullrush" 1974 6000
+"Little Pool" -118.5172186 39.61177954 "Alkali Bullrush" 1974 1200
+"Carson Lake" -118.7313205 39.31216183 "Hardstem Bullrush" 1975 788
+"Stillwater Res" -118.6387205 39.46690273 "Hardstem Bullrush" 1975 900
+"Tule Lake" -118.7261867 39.48407498 "Alkali Bullrush" 1975 1500
+"Mallard Lake" -118.5092326 39.58643327 "Hardstem Bullrush" 1975 0
+"Big Pool" -118.5364232 39.5900966 "Alkali Bullrush" 1975 5000
+"Little Pool" -118.5172186 39.61177954 "Alkali Bullrush" 1975 300

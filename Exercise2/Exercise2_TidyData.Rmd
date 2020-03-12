@@ -1,0 +1,196 @@
+---
+title: "Exercise 2: Tidy Data"
+author: "Eric Kelchlin"
+date: "May 2018"
+output: html_document
+   
+---
+<style type="text/css">
+
+body, td {
+   font-size: 16pt;
+}
+code.r{
+  font-size: 16pt;
+}
+pre {
+  font-size: 16pt
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.table.format = "html")
+```
+
+# Load the required packages
+
+You can use require() or library() to load a package.
+
+```{r, required packages,message=FALSE, warning=FALSE}
+
+require(knitr)      # to knit our documents
+require(tidyverse)  # to wrangle data
+require(readxl)     # to import excel sheets
+require(kableExtra) # for nice tables
+
+```
+
+# Set your working directory
+
+Edit the path to fit your configuration.  This is an easy way to ensure that any outputs are saved to a known location.
+
+```{r, set directory, message = FALSE}
+
+setwd("C:/CSP4200/Exercise3")
+
+```
+
+# Read-in Excel data
+
+The easiest way to read-in Excel data is to use the `read_excel()` function from the readxl package which is a happy member of the tidyverse family of packages.
+
+```{r, Importing Data}
+
+Ibis <- read_excel("Ibis_Data.xlsx", sheet = "Ibis_Data")
+
+```
+
+## Task 1:
+
+What if we had a spreadsheet with a couple lines that we wanted to skip or perhaps a specific range of cells that we only wanted to read-in?  Use the help on the `read_excel()` function to see if it's possible. Do this by simply clicking *F1* while your cursur is on the function name.
+
+# View the Data
+
+```{r, viewing the data}
+
+glimpse(Ibis) 
+
+names(Ibis)
+
+head(Ibis, n = 5)
+
+View(Ibis) # note the capital V
+
+```
+
+```{r, To knit the table in a nice format}
+
+kable(Ibis, caption = "Table 1: Ibis Data in a Wide Format") %>%
+  kable_styling(full_width = FALSE, font_size = 16)
+   
+```
+
+# Tidy the Data
+
+Use the pipe **%>%** symbol **(Ctrl + Shft + M)** to simplify coding. 
+
+### gather() function template
+
+new object <- data %>% 
+  gather(key = , value = , columns to gather, other arguments)
+  
+```{r, the gather function, eval = FALSE}
+
+Ibis2 <- Ibis %>% 
+  gather(key = Year, value = Count, `1972`:`1975`, convert = TRUE)
+
+# What does the convert = TRUE argument do?
+
+# Knit the table in a nice format. Notice how you can nest functions with the pipe.
+
+Ibis2 %>% 
+  head(n=10) %>% 
+  kable(caption="Table 2: Ibis Data in a Long Format") %>%
+  kable_styling(full_width = T, bootstrap_options = c("hover", "condensed"))
+
+```
+
+## Task 2:
+
+There are two other ways to identify the the fields to gather in this example. Can you figure this out?  Tip: one way is to identify what not to gather and the other identifies the columns by location.
+
+```{r, Task 2} 
+
+
+```
+
+## Task 3:
+
+The `spread()` function restructures the long format to a wide format.  Use this function to return our gathered dataset back into the orignal format.  This one is easier than the gather function.
+
+###  spread() template
+
+newobject <- data %>% 
+  spread(key = column to pivot, value = column with the values)
+
+```{r, Task 3}  
+
+
+```
+
+# Export the Data
+
+The example below shows you how to easily export the data as a .txt file. You can also export the data as a .csv file type. 
+
+```{r, write the tables out as a csv, message = FALSE, eval=FALSE}
+
+write.table(Ibis2, file = "IbisClean.txt", row.names = FALSE, sep = "\t")
+
+# row names are output by default, and we don't want that.
+# sep = "\t" indicates that the file is to be tab seperated.
+
+```
+
+## Task 4:
+
+Export the data as a .csv file.  Use the Help on the *write.csv()* function to learn how. Make sure you omit row names and include a seperator.
+
+```{r, Task 4}
+
+
+
+```
+
+
+# Independent Exercise
+
+1.  Use the `read_csv()` function to import the *Sage Grouse Data.csv* dataset.  Assign the data into a new object called *Sage*
+
+2.  Examine the data.  How many Observations and variables do we have? What are the variable names?  What data type are the 4 date fields and what should they be?
+
+3. We have multiple observational units combined in one table. How many do you think we have?
+
+4.  Some variables are in wide format (i.e., observations), can you pick them out? 
+
+```{r, Tidy Exercise}
+
+```
+
+# Class Exercise
+
+Question: What is the maximum count of male and female sage grouse per lek?
+
+To answer this question, we'll need to use the `select()`, `group_by()` and `summarise()`functions from the **dplyr** package.  This is a great introduction of what we will be learning more of tomorrow.
+
+## Steps:
+
+1. Select only the variables you need using the `select()` function.  
+2. Gather the *FieldResults* fields into a long format using the `gather()` function.  Use the `na.rm = TRUE` argument to remove the cells with missing values.
+3. Seperate the field with the data using the `seperate()` function
+4. Use the `group_by()` and `summarise()`functions to calculate the maximum number of sage grouse per lek.  Note:  `summarise()` is finiky to missing values, that's why we need to filter them out first. Alternatively, you could just use add `na.rm = TRUE` at the end of the `summarise( )` as well.
+
+
+```{r, class exercise}
+
+
+```
+
+
+
+
+
+
+
+
+
